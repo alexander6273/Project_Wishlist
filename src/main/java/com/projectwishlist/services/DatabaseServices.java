@@ -38,7 +38,7 @@ public class DatabaseServices {
     public String getAllItems() throws SQLException {
         //ArrayList<Item> users = new ArrayList<>();
 
-        ResultSet resultSet = getResultSet("SELECT * FROM Item");
+        ResultSet resultSet = getResultSet("SELECT * FROM projectwishlist.item");
         String itemName = "fejl";
         System.out.println(itemName);
 

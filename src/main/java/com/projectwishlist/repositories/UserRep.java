@@ -41,4 +41,25 @@ public class UserRep {
         }
         return user;
      }
+     
+     
+     public boolean authenticateUser(String usernameInput, String passwordInput) throws SQLException {
+         String sql = "SELECT ('username', 'password') FROM projectwishlist.user WHERE username = " + "'" + usernameInput + "'";
+         ResultSet resultSet = databaseRep.getResultSet(sql);
+
+         String username = null;
+         String password = null;
+
+         while (resultSet.next()) {
+             username = resultSet.getString("user_username");
+             password = resultSet.getString("user_password");
+         }
+
+         assert username != null;
+         if (!username.equals(usernameInput)) return false;
+         assert password != null;
+         return password.equals(passwordInput);
+     }
+    
+    
 }

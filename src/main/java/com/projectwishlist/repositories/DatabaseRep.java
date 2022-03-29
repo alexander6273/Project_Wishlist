@@ -1,19 +1,17 @@
-package com.projectwishlist.services;
+package com.projectwishlist.repositories;
 
-import com.projectwishlist.models.Item;
 import com.projectwishlist.repositories.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Objects;
 
-public class DatabaseServices {
+public class DatabaseRep {
     private Connection connection = null;
 
-    public DatabaseServices() {
+    public DatabaseRep() {
         this.connection = DatabaseConnection.getConnection();
     }
 

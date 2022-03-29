@@ -1,6 +1,6 @@
 package com.projectwishlist.controllers;
 
-import com.projectwishlist.services.DatabaseServices;
+import com.projectwishlist.repositories.DatabaseRep;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 @RestController
 public class MainController
 {
-    DatabaseServices databaseServices = new DatabaseServices();
+    DatabaseRep databaseRep = new DatabaseRep();
     //Controller methods
     @GetMapping("/")
     public String index() {
@@ -19,7 +19,7 @@ public class MainController
     @GetMapping("/lol")
     public String lol(){
         try {
-            return databaseServices.getAllItems();
+            return databaseRep.getAllItems();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -19,15 +19,15 @@ public class ItemRep {
         {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            sqlString = "SELECT * from persons";
+            sqlString = "SELECT * from `projectwishlist`.`item`";
             rs = stmt.executeQuery(sqlString);
 
             while(rs.next())
             {
-                String fn= rs.getString("fname");
-                String sn = rs.getString("sname");
-                int a = rs.getInt("age");
-                System.out.println("\tname = " + fn + " " + sn + ", Alder = " + a);
+                String name= rs.getString("item_name");
+                int price = rs.getInt("item_price");
+                String link = rs.getString("item_link");
+                System.out.println("\titem name = " + name + ", price = " + price + ", link = " + link);
             }
         }
         catch( Exception e )
@@ -45,7 +45,7 @@ public class ItemRep {
 
         try
         {
-            sqlString = "INSERT INTO `projectwishlist`.`item` (`id`,`name`,`price`,`link`, `reserved`) " +
+            sqlString = "INSERT INTO `projectwishlist`.`item` (`name`,`price`,`link`, `reserved`) " +
                     "VALUES('" + name + "'," + price + "," + link + "," + reserved + ")";
             stmt.executeUpdate(sqlString);
         }

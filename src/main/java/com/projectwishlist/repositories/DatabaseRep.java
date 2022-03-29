@@ -7,9 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class DatabaseRep {
     private Connection connection = null;
+    private Statement stmt;
+    private ResultSet rs;
+    private String sqlString;
+    private Connection con;
 
     public DatabaseRep() {
         this.connection = DatabaseConnection.getConnection();
@@ -46,5 +51,19 @@ public class DatabaseRep {
         }
         return itemName;
         // return users;
+    }
+
+    public void insertdata(String table, String columns, String data) {
+        try
+        {
+            sqlString = "INSERT INTO projectwishlist." + table + "(" + columns + ")" +
+                    "VALUES(" + data + ")";
+            stmt.executeUpdate(sqlString);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println(sqlString);
     }
 }

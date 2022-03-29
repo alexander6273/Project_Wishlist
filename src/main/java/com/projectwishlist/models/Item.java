@@ -6,45 +6,30 @@ public class Item
     private String name;
     private int price;
     private String link;
+    private boolean reseved;
+
 
     public Item(int id, String name, int price, String link) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.link = link;
+        this.reseved = reseved;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getName() {return name;}
 
-    public String getName() {
-        return name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int getPrice() {return price;}
 
-    public int getPrice() {
-        return price;
-    }
+    public void setPrice(int price) {this.price = price;}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    public String getLink() {return link;}
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
+    public void setLink(String link) {this.link = link;}
 
     @Override
     public String toString() {

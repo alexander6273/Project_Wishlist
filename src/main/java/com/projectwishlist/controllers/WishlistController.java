@@ -1,5 +1,23 @@
 package com.projectwishlist.controllers;
 
-public class WishlistController
-{
+import com.projectwishlist.models.Wishlist;
+import com.projectwishlist.repositories.WishlistRep;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class WishlistController {
+    WishlistRep wishListRep = new WishlistRep();
+
+    @GetMapping("/wltest")
+    public String wlTest() {
+        return wishListRep.getData();
+    }
+
+    @GetMapping("/newTest")
+    public String newTest() {
+        Wishlist wl = wishListRep.getWishListFromDB(1);
+        System.out.println(wl);
+        return wl.toString();
+    }
 }

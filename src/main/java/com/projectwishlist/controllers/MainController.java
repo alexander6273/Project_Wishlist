@@ -3,6 +3,7 @@ package com.projectwishlist.controllers;
 import com.projectwishlist.models.User;
 import com.projectwishlist.repositories.DatabaseRep;
 import com.projectwishlist.repositories.UserRep;
+import com.projectwishlist.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,19 +23,8 @@ public class MainController
     public String lol(){
 
         UserRep userRep = new UserRep();
-        try {
-            User user = userRep.getUserFromDb(1);
-            return user.toString();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            return databaseRep.getAllItems();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "Hej med dig";
+        UserService userService = new UserService();
+        User user = userService.getUserFromId(1);
+        return user.toString();
     }
 }

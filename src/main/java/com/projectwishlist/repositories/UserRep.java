@@ -2,8 +2,10 @@ package com.projectwishlist.repositories;
 
 import com.projectwishlist.models.User;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserRep {
  private User user;
@@ -13,7 +15,8 @@ public class UserRep {
         this.databaseRep = new DatabaseRep();
     }
 
-    public User getUserFromDb(int userId) throws SQLException {
+    public ArrayList<String> getUserFromDb(int userId) throws SQLException {
+        ArrayList<String> user = new ArrayList<>();
         /* SELECT * FROM Db_test.users WHERE user = '1'*/
         String sql = "SELECT * FROM projectwishlist.user WHERE user_id = " + "'" + userId + "'";
         ResultSet resultSet = databaseRep.getResultSet(sql);
@@ -21,7 +24,6 @@ public class UserRep {
         String username = null;
         String password = null;
         String firstName = null;
-        User user = null;
 
         while (resultSet.next()) {
             username = resultSet.getString("user_username");
@@ -30,9 +32,13 @@ public class UserRep {
         }
         if(username != null) {
 
-            user = new User(userId, username, password, firstName);
+            //user = new User(userId, username, password, firstName);
+            String userIdString = String.valueOf(userId);
+            user.add(userIdString);
+            user.add(username);
+            user.add(password);
+            user.add(firstName);
         }
-
         return user;
-        }
+     }
 }

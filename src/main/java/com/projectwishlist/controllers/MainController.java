@@ -32,7 +32,8 @@ public class MainController
     public void test(){
 
         DatabaseRep dbr = new DatabaseRep();
-        dbr.insertdata("item", "item_name, item_price, item_link", "kniv, 200, test");
+
+        dbr.insertdata("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
 
     }
 }

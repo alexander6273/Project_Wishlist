@@ -18,6 +18,7 @@ public class DatabaseRep {
 
     public DatabaseRep() {
         this.connection = DatabaseConnection.getConnection();
+        this.stmt = getStatement();
     }
 
     private Statement getStatement() {
@@ -57,7 +58,7 @@ public class DatabaseRep {
         try
         {
             sqlString = "INSERT INTO projectwishlist." + table + "(" + columns + ")" +
-                    "VALUES(" + data + ")";
+                    "VALUES(" + data + ");";
             stmt.executeUpdate(sqlString);
         }
         catch (SQLException e)

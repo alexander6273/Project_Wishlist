@@ -28,4 +28,13 @@ public class MainController
         User user = userService.getUserFromId(1);
         return user.toString();
     }
+
+    @GetMapping("/alextest")
+    public void test(){
+
+        DatabaseRep dbr = new DatabaseRep();
+
+        dbr.insertdata("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
+
+    }
 }

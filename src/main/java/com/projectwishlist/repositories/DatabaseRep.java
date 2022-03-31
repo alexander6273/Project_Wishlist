@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -54,10 +55,10 @@ public class DatabaseRep {
         // return users;
     }
 
-    public void insertdata(String table, String columns, String data) {
+    public void insertdata(String table, String rows, String data) {
         try
         {
-            sqlString = "INSERT INTO projectwishlist." + table + "(" + columns + ")" +
+            sqlString = "INSERT INTO projectwishlist." + table + "(" + rows + ")" +
                     "VALUES(" + data + ");";
             stmt.executeUpdate(sqlString);
         }
@@ -66,5 +67,41 @@ public class DatabaseRep {
             e.printStackTrace();
         }
         System.out.println(sqlString);
+    }
+
+    public String commaSeperateData(ArrayList<String> data){
+        int size = data.size();
+        int count = 1;
+        String result = "";
+        if (size > 0 ){
+            for (String input : data){
+                if (size == count){
+                    result += "'" + input + "'";
+                } else {
+                    result += "'" + input + "'" + ", ";
+                }
+                count ++;
+            }
+
+        }
+        return result;
+    }
+
+    public String commaSeperateRows(ArrayList<String> data){
+        int size = data.size();
+        int count = 1;
+        String result = "";
+        if (size > 0 ){
+            for (String input : data){
+                if (size == count){
+                    result += input ;
+                } else {
+                    result += input + ", ";
+                }
+                count ++;
+            }
+
+        }
+        return result;
     }
 }

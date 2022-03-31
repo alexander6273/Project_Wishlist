@@ -4,16 +4,35 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ItemRep {
 
-    private Statement stmt;
+    /*private Statement stmt;
     private ResultSet rs;
     private String sqlString;
-    private Connection con;
+    private Connection con;*/
 
-    public void selectData()
+    private DatabaseRep databaseRep = null;
+    private String table = "item";
+    private String rows = null;
+
+    public ItemRep()
+    {
+        this.databaseRep = new DatabaseRep();
+        this.rows = rowsToString();
+    }
+
+    public String rowsToString(){
+        ArrayList<String> rows = new ArrayList<>();
+        rows.add("item_name");
+        rows.add("item_price");
+        rows.add("item_link");
+        return databaseRep.commaSeperateRows(rows);
+    }
+
+    /*public void selectData()
     {
         try
         {
@@ -34,25 +53,24 @@ public class ItemRep {
         {
             e.printStackTrace();
         }
+    }*/
+
+    public void insertToDb(ArrayList<String> data) {
+        String dataString = databaseRep.commaSeperateData(data);
+        databaseRep.insertdata(table, rows, dataString);
     }
 
-    public void insertdata() {
-        Scanner sc = new Scanner(System.in);
-        String name = sc.next();
-        int price = sc.nextInt();
-        String link = sc.next();
-        boolean reserved = false;
+    public void deleteItem(){
 
-        try
-        {
-            sqlString = "INSERT INTO `projectwishlist`.`item` (`name`,`price`,`link`, `reserved`) " +
-                    "VALUES('" + name + "'," + price + "," + link + "," + reserved + ")";
-            stmt.executeUpdate(sqlString);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        System.out.println(sqlString);
+    }
+
+    public static void main(String[] args)
+    {
+        ItemRep itemRep = new ItemRep();
+        ArrayList<String> data = new ArrayList<>();
+        data.add("test");
+        data.add("200");
+        data.add("link");
+        itemRep.insertToDb(data);
     }
 }

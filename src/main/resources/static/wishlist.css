@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 0 40px;
+}
+
+#wishlist-wrapper {
+    display: flex;
+}
+
+.wishlist {
+    min-width: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+

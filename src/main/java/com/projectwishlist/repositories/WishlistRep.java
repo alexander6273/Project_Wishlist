@@ -3,6 +3,7 @@ package com.projectwishlist.repositories;
 import com.projectwishlist.models.Wishlist;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class WishlistRep {
     private final DatabaseRep dbRep;
@@ -51,4 +52,40 @@ public class WishlistRep {
         }
         return "t";
     }
+
+    public ArrayList<Wishlist> getAllWishlistsFromUser() {
+        ArrayList<Wishlist> listOfWishlists = new ArrayList<>();
+        String sql = "SELECT * FROM projectwishlist.wishlist \n" +
+                "WHERE user_id = 1 ";
+
+        ResultSet rs = dbRep.getResultSet(sql);
+
+
+        int wishlistId = 0;
+        String wishlistName = null;
+        String wishlistLink = null;
+        String userId = null;
+
+        try {
+            while(rs.next()) {
+                wishlistId = rs.getInt("wishlist_id");
+                wishlistName = rs.getString("wishlist_name");
+                wishlistLink = rs.getString("wishlist_link");
+                userId = rs.getString("user_id");
+                System.out.println(wishlistName);
+
+                if (wishlistName != null) {
+                    Wishlist wishlist = new Wishlist(wishlistId, wishlistName, wishlistLink, userId);
+                    listOfWishlists.add(wishlist);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(listOfWishlists);
+        return listOfWishlists;
+    }
+
+
 }

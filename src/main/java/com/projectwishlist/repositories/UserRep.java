@@ -55,8 +55,7 @@ public class UserRep {
              password = resultSet.getString("user_password");
          }
 
-         assert username != null;
-         if (!username.equals(usernameInput)) return false;
+         if (username != null && !username.equals(usernameInput)) return false;
          assert password != null;
          return password.equals(passwordInput);
      }

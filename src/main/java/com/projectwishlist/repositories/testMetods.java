@@ -12,6 +12,6 @@ public class testMetods
         test.add("2000");
         test.add("test");
         System.out.println(dbr.commaSeperateData(test));
-        
+        dbr.deletedata();
     }
 }

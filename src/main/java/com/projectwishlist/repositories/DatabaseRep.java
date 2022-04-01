@@ -52,9 +52,9 @@ public class DatabaseRep {
         // return users;
     }
 
-    public ResultSet getDataFromDbWhereId(String table, String rowId, String dataId){
+    public ResultSet getDataFromDbWhereId(String table, String rowIdName, int dataId){
         String sql = "SELECT * FROM projectwishlist." + table +
-                "WHERE" + rowId + "='" + dataId + "';";
+                "WHERE" + rowIdName + "='" + dataId + "';";
         ResultSet resultSet = getResultSet(sql);
         return resultSet;
     }

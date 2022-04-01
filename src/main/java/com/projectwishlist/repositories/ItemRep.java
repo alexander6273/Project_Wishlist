@@ -1,11 +1,6 @@
 package com.projectwishlist.repositories;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ItemRep {
 
@@ -16,20 +11,25 @@ public class ItemRep {
 
     private DatabaseRep databaseRep = null;
     private String table = "item";
-    private String rows = null;
+    private String rowsString = null;
+    private ArrayList<String> rows = new ArrayList<>();
 
     public ItemRep()
     {
+        declareRowsArray();
         this.databaseRep = new DatabaseRep();
-        this.rows = rowsToString();
+        this.rowsString = rowsToString();
     }
 
     public String rowsToString(){
-        ArrayList<String> rows = new ArrayList<>();
+        return databaseRep.commaSeperateRows(rows);
+    }
+
+    public void declareRowsArray(){
+        rows.add("item_id");
         rows.add("item_name");
         rows.add("item_price");
         rows.add("item_link");
-        return databaseRep.commaSeperateRows(rows);
     }
 
     /*public void selectData()
@@ -56,12 +56,16 @@ public class ItemRep {
     }*/
 
     public void insertToDb(ArrayList<String> data) {
+        //removes id because auto increment
+        rows.remove(0);
         String dataString = databaseRep.commaSeperateData(data);
-        databaseRep.insertdata(table, rows, dataString);
+        databaseRep.insertdata(table, rowsString, dataString);
+        //adds id back
+        rows.add(0, "item_id");
     }
 
     public void deleteItem(){
-
+        databaseRep.deletedata(table, rowsString, );
     }
 
     public static void main(String[] args)

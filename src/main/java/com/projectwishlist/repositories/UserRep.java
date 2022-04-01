@@ -31,7 +31,6 @@ public class UserRep {
             firstName = resultSet.getString("user_firstname");
         }
         if(username != null) {
-
             //user = new User(userId, username, password, firstName);
             String userIdString = String.valueOf(userId);
             user.add(userIdString);
@@ -59,6 +58,7 @@ public class UserRep {
          assert password != null;
          return password.equals(passwordInput);
      }
+
     
     
 }

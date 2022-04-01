@@ -15,7 +15,6 @@ public class UserService {
 
     public User getUserFromId(int userId){
         User user = null;
-
         try {
             ArrayList<String> userInformation = userRep.getUserFromDb(userId);
             int user_id = Integer.parseInt(userInformation.get(0));

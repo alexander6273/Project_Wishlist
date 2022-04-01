@@ -6,29 +6,44 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class WishlistRep {
-    private final DatabaseRep dbRep;
+    private final DatabaseRep databaseRep;
+    private final String rowsString;
+    private final String table;
+    private final ArrayList<String> rows = new ArrayList<String>();
+
 
     public WishlistRep() {
-        this.dbRep = new DatabaseRep();
+        this.databaseRep = new DatabaseRep();
+        this.table = "wishlist";
+        this.rowsString = rowsToString();
+
     }
 
-    public Wishlist getWishListFromDB(int wishlistID) {
-        String sql = "SELECT * FROM projectwishlist.wishlist" +
-                " WHERE wishlist_id = " + "'" + wishlistID + "'";
-        ResultSet rs = dbRep.getResultSet(sql);
+    public String rowsToString(){
+        rows.add("wishlist_id");
+        rows.add("wishlist_name");
+        rows.add("wishlist_link");
+        rows.add("user_id");
+        return databaseRep.commaSeperateRows(rows);
+    }
+
+
+
+    public Wishlist getWishListFromDB(int wishlistId) {
+        ResultSet resultSet = databaseRep.getDataFromDbWhereId(table, rows.get(0), wishlistId);
 
         String wishlistName = null;
         String wishlistLink = null;
         String userId = null;
 
         try {
-            while(rs.next()) {
-                wishlistName = rs.getString("wishlist_name");
-                wishlistLink = rs.getString("wishlist_link");
-                userId = rs.getString("user_id");
+            while(resultSet.next()) {
+                wishlistName = resultSet.getString(rows.get(0));
+                wishlistLink = resultSet.getString(rows.get(1));
+                userId = resultSet.getString(rows.get(2));
             }
             if (wishlistName != null) {
-                return new Wishlist(wishlistID, wishlistName, wishlistLink, userId);
+                return new Wishlist(wishlistId, wishlistName, wishlistLink, userId);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,8 +52,7 @@ public class WishlistRep {
     }
 
     public String getData() {
-        ResultSet rs = dbRep.getResultSet("SELECT * FROM projectwishlist.wishlist");
-
+        ResultSet rs = databaseRep.getResultSet("SELECT * FROM projectwishlist.wishlist");
         try {
             while(rs.next()) {
                 String col1 = rs.getString("wishlist_id");
@@ -58,9 +72,7 @@ public class WishlistRep {
         String sql = "SELECT * FROM projectwishlist.wishlist \n" +
                 "WHERE user_id = 1 ";
 
-        ResultSet rs = dbRep.getResultSet(sql);
-
-
+        ResultSet rs = databaseRep.getResultSet(sql);
         int wishlistId = 0;
         String wishlistName = null;
         String wishlistLink = null;

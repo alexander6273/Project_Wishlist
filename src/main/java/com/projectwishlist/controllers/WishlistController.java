@@ -19,7 +19,7 @@ public class WishlistController {
 
     @GetMapping("/newTest")
     public String newTest() {
-        Wishlist wl = wishListRep.getWishListFromDB(1);
+        Wishlist wl = wishListRep.getWishListFromDB();
         System.out.println(wl);
         return wl.toString();
     }

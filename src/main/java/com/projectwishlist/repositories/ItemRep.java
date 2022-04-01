@@ -56,17 +56,15 @@ public class ItemRep {
     }*/
 
     public void insertToDb(ArrayList<String> data) {
-        //removes id because auto increment
-        rows.remove(0);
         String dataString = databaseRep.commaSeperateData(data);
-        databaseRep.insertdata(table, rowsString, dataString);
-        //adds id back
-        rows.add(0, "item_id");
+        databaseRep.insertdata(table, databaseRep.removeIdFromRow(rowsString), dataString);
     }
 
+    /*
     public void deleteItem(){
         databaseRep.deletedata(table, rowsString, );
     }
+     */
 
     public static void main(String[] args)
     {

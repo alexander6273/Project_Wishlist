@@ -55,8 +55,7 @@ public class DatabaseRep {
     public ResultSet getDataFromDbWhereId(String table, String rowIdName, int dataId){
         String sql = "SELECT * FROM projectwishlist." + table +
                 "WHERE" + rowIdName + "='" + dataId + "';";
-        ResultSet resultSet = getResultSet(sql);
-        return resultSet;
+        return getResultSet(sql);
     }
 
     public void insertdata(String table, String rows, String data) {
@@ -83,6 +82,10 @@ public class DatabaseRep {
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public String removeIdFromRow(String rowString){
+        return rowString.substring(rowString.indexOf(',') + 1);
     }
 
     public String commaSeperateData(ArrayList<String> data){

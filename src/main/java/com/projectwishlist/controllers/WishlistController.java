@@ -16,13 +16,15 @@ public class WishlistController {
     public String wlTest() {
         return wishListRep.getData();
     }
-
+/*
     @GetMapping("/newTest")
     public String newTest() {
         Wishlist wl = wishListRep.getWishListFromDB();
         System.out.println(wl);
         return wl.toString();
     }
+
+ */
 
     @GetMapping("/getWishlist")
     public String getWishlist(Model model) {

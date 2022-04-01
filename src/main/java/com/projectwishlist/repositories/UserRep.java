@@ -2,33 +2,41 @@ package com.projectwishlist.repositories;
 
 import com.projectwishlist.models.User;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserRep {
- private User user;
- private final DatabaseRep databaseRep;
+     private final DatabaseRep databaseRep;
+     private final String table = "user";
+     private ArrayList<String> rows = new ArrayList<String>();
 
-    public UserRep() {
-        this.databaseRep = new DatabaseRep();
-    }
 
-    public ArrayList<String> getUserFromDb(int userId) throws SQLException {
+
+     public UserRep() {
+         declareRows();
+         this.databaseRep = new DatabaseRep();
+     }
+
+     public void declareRows(){
+        rows.add("user_id");
+        rows.add("user_username");
+        rows.add("user_password");
+        rows.add("user_firstname");
+     }
+
+     public ArrayList<String> getUserFromDb(int userId) throws SQLException {
         ArrayList<String> user = new ArrayList<>();
-        /* SELECT * FROM Db_test.users WHERE user = '1'*/
-        String sql = "SELECT * FROM projectwishlist.user WHERE user_id = " + "'" + userId + "'";
-        ResultSet resultSet = databaseRep.getResultSet(sql);
+        ResultSet resultSet = databaseRep.getDataWhereId(table, rows.get(0), userId);
 
         String username = null;
         String password = null;
         String firstName = null;
 
         while (resultSet.next()) {
-            username = resultSet.getString("user_username");
-            password = resultSet.getString("user_password");
-            firstName = resultSet.getString("user_firstname");
+            username = resultSet.getString(rows.get(1));
+            password = resultSet.getString(rows.get(2));
+            firstName = resultSet.getString(rows.get(3));
         }
         if(username != null) {
             //user = new User(userId, username, password, firstName);
@@ -39,19 +47,22 @@ public class UserRep {
             user.add(firstName);
         }
         return user;
-     }
-     
-     
+      }
+
+
      public boolean authenticateUser(String usernameInput, String passwordInput) throws SQLException {
-         String sql = "SELECT ('username', 'password') FROM projectwishlist.user WHERE username = " + "'" + usernameInput + "'";
+         String sql = "SELECT ('" + rows.get(1) +", '" + rows.get(2) +
+                 "') FROM projectwishlist." + table +
+                 " WHERE " + rows.get(1) + " = " + "'" + usernameInput + "'";
+
          ResultSet resultSet = databaseRep.getResultSet(sql);
 
          String username = null;
          String password = null;
 
          while (resultSet.next()) {
-             username = resultSet.getString("user_username");
-             password = resultSet.getString("user_password");
+             username = resultSet.getString(rows.get(1));
+             password = resultSet.getString(rows.get(2));
          }
 
          if (username != null && !username.equals(usernameInput)) return false;

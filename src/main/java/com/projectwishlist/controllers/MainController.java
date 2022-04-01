@@ -6,9 +6,6 @@ import com.projectwishlist.repositories.UserRep;
 import com.projectwishlist.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.SQLException;
 
 @Controller
 public class MainController
@@ -34,7 +31,7 @@ public class MainController
 
         DatabaseRep dbr = new DatabaseRep();
 
-        dbr.insertdata("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
+        dbr.insertData("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
 
     }
 }

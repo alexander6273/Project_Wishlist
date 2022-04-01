@@ -37,28 +37,15 @@ public class DatabaseRep {
         return null;
     }
 
-    public String getAllItems() throws SQLException {
-        //ArrayList<Item> users = new ArrayList<>();
+    public ResultSet getDataWhereId(String table, String rowIdName, int dataId){
 
-        ResultSet resultSet = getResultSet("SELECT * FROM projectwishlist.item");
-        String itemName = "fejl";
-        System.out.println(itemName);
-
-        while (resultSet.next()) {
-            itemName = resultSet.getString("item_name");
-            System.out.println(itemName);
-        }
-        return itemName;
-        // return users;
-    }
-
-    public ResultSet getDataFromDbWhereId(String table, String rowIdName, int dataId){
         String sql = "SELECT * FROM projectwishlist." + table +
-                "WHERE" + rowIdName + "='" + dataId + "';";
+                " WHERE " + rowIdName + "='" + dataId + "';";
+        System.out.println(sql);
         return getResultSet(sql);
     }
 
-    public void insertdata(String table, String rows, String data) {
+    public void insertData(String table, String rows, String data) {
         try
         {
             sqlString = "INSERT INTO projectwishlist." + table + "(" + rows + ")" +
@@ -123,4 +110,6 @@ public class DatabaseRep {
         }
         return result;
     }
+
+
 }

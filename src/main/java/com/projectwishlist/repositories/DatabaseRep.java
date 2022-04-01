@@ -72,11 +72,11 @@ public class DatabaseRep {
         System.out.println(sqlString);
     }
 
-    public void deletedata(String table,String row, String itemId){
+    public void deleteData(String table,String rowId, int id){
         try
         {
             sqlString = "DELETE FROM projectwishlist." + table +
-                    "WHERE (" + row + "=" + itemId + ");";
+                    " WHERE (" + rowId + "='" + id + "');";
             statement.executeUpdate(sqlString);
         }
         catch (SQLException e){

@@ -60,19 +60,15 @@ public class ItemRep {
         databaseRep.insertdata(table, databaseRep.removeIdFromRow(rowsString), dataString);
     }
 
-    /*
-    public void deleteItem(){
-        databaseRep.deletedata(table, rowsString, );
+
+    public void deleteItem(int itemId){
+        databaseRep.deleteData(table, rows.get(0), itemId);
     }
-     */
+
 
     public static void main(String[] args)
     {
         ItemRep itemRep = new ItemRep();
-        ArrayList<String> data = new ArrayList<>();
-        data.add("test");
-        data.add("200");
-        data.add("link");
-        itemRep.insertToDb(data);
+        itemRep.deleteItem(2);
     }
 }

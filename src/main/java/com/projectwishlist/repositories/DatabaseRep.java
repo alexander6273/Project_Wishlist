@@ -1,25 +1,22 @@
 package com.projectwishlist.repositories;
 
-import com.projectwishlist.repositories.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class DatabaseRep {
     private Connection connection = null;
-    private Statement stmt;
+    private Statement statement;
     private ResultSet rs;
     private String sqlString;
     private Connection con;
 
     public DatabaseRep() {
         this.connection = DatabaseConnection.getConnection();
-        this.stmt = getStatement();
+        this.statement = getStatement();
     }
 
     private Statement getStatement() {
@@ -55,18 +52,37 @@ public class DatabaseRep {
         // return users;
     }
 
+    public ResultSet getDataFromDbWhereId(String table, String rowId, String dataId){
+        String sql = "SELECT * FROM projectwishlist." + table +
+                "WHERE" + rowId + "='" + dataId + "';";
+        ResultSet resultSet = getResultSet(sql);
+        return resultSet;
+    }
+
     public void insertdata(String table, String rows, String data) {
         try
         {
             sqlString = "INSERT INTO projectwishlist." + table + "(" + rows + ")" +
                     "VALUES(" + data + ");";
-            stmt.executeUpdate(sqlString);
+            statement.executeUpdate(sqlString);
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
         System.out.println(sqlString);
+    }
+
+    public void deletedata(String table,String row, String itemId){
+        try
+        {
+            sqlString = "DELETE FROM projectwishlist." + table +
+                    "WHERE (" + row + "=" + itemId + ");";
+            statement.executeUpdate(sqlString);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public String commaSeperateData(ArrayList<String> data){

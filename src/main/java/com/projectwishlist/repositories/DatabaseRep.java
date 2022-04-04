@@ -112,4 +112,23 @@ public class DatabaseRep {
     }
 
 
+    public String commaSeperateRowsWithTablename(ArrayList<String> data, String table){
+        int size = data.size();
+        int count = 1;
+        String result = "";
+        if (size > 0 ){
+            for (String input : data){
+                if (size == count){
+                    result += table + "." + input ;
+                } else {
+                    result += table + "." + input + ", ";
+                }
+                count ++;
+            }
+
+        }
+        return result;
+    }
+
+
 }

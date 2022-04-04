@@ -25,14 +25,12 @@ public class WishlistController {
     }
 
  */
-/*
     @GetMapping("/getWishlist")
     public String getWishlist(Model model) {
-        ArrayList<Wishlist> list = wishListRep.getAllWishlistsFromUser();
+        ArrayList<Wishlist> list = wishListRep.getAllWishlistsFromUser(1);
         model.addAttribute("wishlists", list);
         return "wishlist";
     }
- */
 
 
 }

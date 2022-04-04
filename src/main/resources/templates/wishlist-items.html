@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" th:href="@{/navbar.css}" href="../static/navbar.css">
     <link rel="stylesheet" th:href="@{/style.css}" href="../static/style.css">
-    <link rel="stylesheet" th:href="@{/wishlist.css}" href="../static/wishlist.css">
-
+    <title>Wishlist items</title>
 </head>
-
-
 <body>
     <header>
         <nav>
@@ -21,14 +21,13 @@
     </header>
 
     <main>
-        <h1 class="header">My wishlists</h1>
-
-        <section id="wishlist-wrapper">
-            <div class="wishlist" th:each="wishlist: ${wishlists}">
-                <a th:href="@{/wishlist?id={id}(id=${wishlist.getId()})}">asda</a>
-                <span th:text="${wishlist.getName()}"></span>
+        <section id="item-wrapper">
+            <div class="item" th:each="item: ${items}">
+                <span th:text="${item.getName()}"></span>
+                <span th:text="${item.getPrice()}"></span>
             </div>
         </section>
     </main>
+
 </body>
 </html>

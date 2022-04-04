@@ -13,7 +13,7 @@ public class UserService {
         this.userRep = new UserRep();
     }
 
-    public User getUserFromId(int userId){
+    /*public User getUserFromId(int userId){
         User user = null;
         try {
             ArrayList<String> userInformation = userRep.getUserFromDb(userId);
@@ -29,5 +29,5 @@ public class UserService {
 
 
         return user;
-    }
+    }*/
 }

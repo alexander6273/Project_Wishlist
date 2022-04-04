@@ -17,14 +17,14 @@ public class MainController
         System.out.println("LOL");
         return "index";
     }
-    @GetMapping("/lol")
+    /*@GetMapping("/lol")
     public String lol(){
 
         UserRep userRep = new UserRep();
         UserService userService = new UserService();
         User user = userService.getUserFromId(1);
         return user.toString();
-    }
+    }*/
 
     @GetMapping("/alextest")
     public void test(){

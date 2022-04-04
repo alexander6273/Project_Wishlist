@@ -1,5 +1,7 @@
 package com.projectwishlist.repositories;
 
+import com.projectwishlist.models.Wishlist;
+
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -30,26 +32,22 @@ public class WishlistRep {
         rows.add("user_id");
     }
 
-    public ArrayList<String> getWishListFromDB(int wishlistId) {
+    public Wishlist getWishListFromDB(int wishlistId) {
         ResultSet resultSet = databaseRep.getDataWhereId(table, rows.get(0), wishlistId);
-        ArrayList<String> wishlist = new ArrayList<String>();
 
-        String wishlistIdString = null;
         String wishlistName = null;
         String wishlistLink = null;
-        String userId = null;
+        int userId;
+        Wishlist wishlist = null;
 
         try {
             while(resultSet.next()) {
-                wishlistIdString = resultSet.getString(rows.get(0));
+                wishlistId = resultSet.getInt(rows.get(0));
                 wishlistName = resultSet.getString(rows.get(1));
                 wishlistLink = resultSet.getString(rows.get(2));
-                userId = resultSet.getString(rows.get(3));
+                userId = resultSet.getInt(rows.get(3));
 
-                wishlist.add(wishlistIdString);
-                wishlist.add(wishlistName);
-                wishlist.add(wishlistLink);
-                wishlist.add(userId);
+                wishlist = new Wishlist(wishlistId, wishlistName,wishlistLink,userId);
             }
             if (wishlistName != null) {
                 return wishlist;
@@ -76,28 +74,24 @@ public class WishlistRep {
         return "t";
     }
 
-    public ArrayList<ArrayList<String>> getAllWishlistsFromUser(int userId) {
-        ArrayList<ArrayList<String>> listOfWishlists = new ArrayList<>();
+    public ArrayList<Wishlist> getAllWishlistsFromUser(int userId) {
+        ArrayList<Wishlist> listOfWishlists = new ArrayList<>();
         ResultSet resultSet = databaseRep.getDataWhereId(table, rows.get(3), userId);
 
-        String wishlistId = null;
+        int wishlistId;
         String wishlistName = null;
         String wishlistLink = null;
-        String userIdString = null;
+        Wishlist wishlist = null;
 
 
         try {
             while(resultSet.next()) {
-                ArrayList<String> wishlist = new ArrayList<>();
-                wishlistId = resultSet.getString(rows.get(0));
+                wishlistId = resultSet.getInt(rows.get(0));
                 wishlistName = resultSet.getString(rows.get(1));
                 wishlistLink = resultSet.getString(rows.get(2));
-                userIdString = resultSet.getString(rows.get(3));
+                userId = resultSet.getInt(rows.get(3));
+                wishlist = new Wishlist(wishlistId,wishlistName,wishlistLink,userId);
 
-                wishlist.add(wishlistId);
-                wishlist.add(wishlistName);
-                wishlist.add(wishlistLink);
-                wishlist.add(userIdString);
                 listOfWishlists.add(wishlist);
             }
 
@@ -109,6 +103,7 @@ public class WishlistRep {
     }
 
     public static void main(String[] args) {
+        /*
         WishlistRep wishlistRep = new WishlistRep();
         ArrayList<ArrayList<String>> wishlistList = wishlistRep.getAllWishlistsFromUser(1);
 
@@ -134,6 +129,9 @@ public class WishlistRep {
 
             count++;
         }
+
+         */
     }
+
 
 }

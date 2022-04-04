@@ -1,5 +1,8 @@
 package com.projectwishlist.repositories;
 
+import com.projectwishlist.models.Item;
+
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ItemRep {
@@ -34,8 +37,48 @@ public class ItemRep {
         databaseRep.deleteData(table, rows.get(0), itemId);
     }
 
+    public ArrayList<Item> getItemsFromWishlist(int wishlistId){
+        rowsString = databaseRep.commaSeperateRowsWithTablename(rows, table);
+
+        String sql = "SELECT " + rowsString + " FROM projectwishlist." + table + " INNER JOIN projectwishlist.wishlistitems ON item.item_id = wishlistitems.item_id WHERE wishlistitems.wishlist_id = " + wishlistId + " ;";
+        ResultSet resultSet = databaseRep.getResultSet(sql);
+        System.out.println(sql);
+        ArrayList<Item> items = new ArrayList<>();
+        int item_id = -1;
+        String item_name = null;
+        int item_price = -1;
+        String item_link = null;
+        Item item = null;
+
+
+
+        try {
+            while(resultSet.next()) {
+
+                item_id = resultSet.getInt(rows.get(0));
+                item_name = resultSet.getString(rows.get(1));
+                item_price = resultSet.getInt(rows.get(2));
+                item_link = resultSet.getString(rows.get(3));
+                item = new Item(item_id, item_name, item_price, item_link);
+                items.add(item);
+                item = null;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+
     public static void main(String[] args) {
         ItemRep itemRep = new ItemRep();
-        itemRep.deleteItem(2);
+        ArrayList<Item> items = itemRep.getItemsFromWishlist(2);
+
+        System.out.println("Wishlist nr: " + 2);
+        for (Item item : items){
+            System.out.println(items);
+        }
     }
 }

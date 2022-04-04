@@ -4,9 +4,9 @@ public class Wishlist {
     private int id;
     private String name;
     private String link;
-    private String userId;
+    private int userId;
 
-    public Wishlist(int id, String name, String link, String userId) {
+    public Wishlist(int id, String name, String link, int userId) {
         this.id = id;
         this.name = name;
         this.link = link;
@@ -35,7 +35,7 @@ public class Wishlist {
         return link;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 

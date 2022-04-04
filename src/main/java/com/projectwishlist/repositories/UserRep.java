@@ -47,9 +47,10 @@ public class UserRep {
 
 
      public boolean authenticateUser(String usernameInput, String passwordInput) throws SQLException {
-         String sql = "SELECT ('" + rows.get(1) +", '" + rows.get(2) +
-                 "') FROM projectwishlist." + table +
-                 " WHERE " + rows.get(1) + " = " + "'" + usernameInput + "'";
+         String sql = "SELECT * FROM projectwishlist." + table +
+                 " WHERE " + rows.get(1) + " = " + "'" + usernameInput + "' AND " + rows.get(2) + " = '" + passwordInput + "' ;";
+
+         System.out.println(sql);
 
          ResultSet resultSet = databaseRep.getResultSet(sql);
 
@@ -65,7 +66,4 @@ public class UserRep {
          assert password != null;
          return password.equals(passwordInput);
      }
-
-    
-    
 }

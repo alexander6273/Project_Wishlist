@@ -2,9 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ønskeøen</title>
+    <link rel="stylesheet" th:href="@{/navbar.css}" href="../static/navbar.css">
+    <link rel="stylesheet" th:href="@{/style.css}" href="../static/style.css">
+    <style>
+        .myDiv{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
+
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <img src="/images/peterp.png" alt="logo">
+            <p class="title">Ønskeøen</p>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <h1 class="header"></h1>
+</main>
+
+<div class="myDiv">
+    <div>
+        <h2>Login</h2>
+        <form method="POST" action="/checkUser">
+            <label for="inputUsername">Username</label><br>
+            <input type="text" id="inputUsername" name="username"><br>
+            <label for="inputPassword">password</label><br>
+            <input type="text" id="inputPassword" name="password"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <div>
+        <h2>Signup</h2>
+        <form>
+            <label for="newEmail">Email</label><br>
+            <input type="text" id="newEmail" name="Email"><br>
+            <label for="newUsername">Username</label><br>
+            <input type="text" id="newUsername" name="Username"><br>
+            <label for="newPassword">password</label><br>
+            <input type="text" id="newPassword" name="password"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

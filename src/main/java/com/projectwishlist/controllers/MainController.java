@@ -34,4 +34,5 @@ public class MainController
         dbr.insertData("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
 
     }
+
 }

@@ -3,15 +3,3 @@
     padding: 0;
 }
 
-nav img {
-    height: 50px;
-}
-
-nav .nav-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-nav .title {
-    font-size: 40px;
-}

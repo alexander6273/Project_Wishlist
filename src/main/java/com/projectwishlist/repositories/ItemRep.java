@@ -78,7 +78,7 @@ public class ItemRep {
 
         System.out.println("Wishlist nr: " + 2);
         for (Item item : items){
-            System.out.println(items);
+            System.out.println(item);
         }
     }
 }

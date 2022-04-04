@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class UserRep {
      private final DatabaseRep databaseRep;
      private final String table = "user";
-     private ArrayList<String> rows = new ArrayList<String>();
+     private final ArrayList<String> rows = new ArrayList<String>();
 
 
 
@@ -25,13 +25,13 @@ public class UserRep {
         rows.add("user_firstname");
      }
 
-     public ArrayList<String> getUserFromDb(int userId) throws SQLException {
-        ArrayList<String> user = new ArrayList<>();
+     public User getUserFromDb(int userId) throws SQLException {
         ResultSet resultSet = databaseRep.getDataWhereId(table, rows.get(0), userId);
 
         String username = null;
         String password = null;
         String firstName = null;
+        User user = null;
 
         while (resultSet.next()) {
             username = resultSet.getString(rows.get(1));
@@ -39,12 +39,8 @@ public class UserRep {
             firstName = resultSet.getString(rows.get(3));
         }
         if(username != null) {
-            //user = new User(userId, username, password, firstName);
-            String userIdString = String.valueOf(userId);
-            user.add(userIdString);
-            user.add(username);
-            user.add(password);
-            user.add(firstName);
+            user = new User(userId, username, password, firstName);
+
         }
         return user;
       }

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class ItemRep {
 
     private DatabaseRep databaseRep = null;
-    private String table = "item";
-    private ArrayList<String> rows = new ArrayList<>();
+    private final String table = "item";
+    private final ArrayList<String> rows = new ArrayList<>();
     private String rowsString = null;
 
     public ItemRep() {
@@ -50,11 +50,8 @@ public class ItemRep {
         String item_link = null;
         Item item = null;
 
-
-
         try {
             while(resultSet.next()) {
-
                 item_id = resultSet.getInt(rows.get(0));
                 item_name = resultSet.getString(rows.get(1));
                 item_price = resultSet.getInt(rows.get(2));
@@ -62,7 +59,6 @@ public class ItemRep {
                 item = new Item(item_id, item_name, item_price, item_link);
                 items.add(item);
                 item = null;
-
             }
 
         } catch (Exception e) {

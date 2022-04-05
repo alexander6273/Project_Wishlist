@@ -18,7 +18,6 @@ public class WishlistRep {
         this.databaseRep = new DatabaseRep();
         this.table = "wishlist";
         this.rowsString = rowsToString();
-
     }
 
     public String rowsToString(){

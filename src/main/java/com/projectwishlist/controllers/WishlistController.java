@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class WishlistController {
     WishlistRep wishListRep = new WishlistRep();
 
+
     @GetMapping("/wltest")
     public String wlTest() {
         return wishListRep.getData();
@@ -32,10 +33,7 @@ public class WishlistController {
  */
     @GetMapping("/getWishlist")
     public String getWishlist(Model model, HttpSession session) {
-        System.out.println("LOL");
-        System.out.println(session.getAttribute("userId"));
         int userId = (int)session.getAttribute("userId");
-
         if(userId > 0) {
             System.out.println();
             System.out.println(userId);

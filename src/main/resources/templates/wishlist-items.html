@@ -20,7 +20,6 @@
             </div>
         </nav>
     </header>
-
     <main>
         <section id="item-wrapper">
             <h1>Wishlist items:</h1>
@@ -35,7 +34,9 @@
                 </div>
 
                 <div class="wishlist-buttons">
-                    <button class="general-button" type="button">Update</button>
+                    <button class="general-button" type="button">
+                        <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
+                    </button>
                     <button class="general-button" type="button">Delete</button>
                 </div>
             </div>

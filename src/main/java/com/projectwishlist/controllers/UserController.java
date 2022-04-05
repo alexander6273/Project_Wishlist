@@ -2,6 +2,7 @@ package com.projectwishlist.controllers;
 
 import com.projectwishlist.models.User;
 import com.projectwishlist.repositories.UserRep;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,21 +19,32 @@ public class UserController
 
     //public String checkUser(@RequestParam ( value = "username", required = false), @RequestParam (value = "password", ){
     @PostMapping("/checkUser")
-    public String checkUser(WebRequest data){
+    public String checkUser(WebRequest data, HttpSession session){
         UserRep userRep = new UserRep();
+        String username = data.getParameter("username");
+        String password = data.getParameter("password");
+
         System.out.println(data.getParameter("username"));
         System.out.println(data.getParameter("password"));
-        System.out.println("heffa");
+
+
         try{
-            boolean test = true;
-            if(test) {
-                return "wishlist";
-            } else {
-                return "lol";
+            int userId = userRep.authenticateUser(username, password);
+            if(userId > 0){
+                session.setAttribute("userId",userId);
+                session.setAttribute("loggedInUsername",username);
+                return "redirect:/getWishlist";
+            }else {
+                return "index";
             }
         } catch (Exception e){
             e.printStackTrace();
         }
         return "fejl";
+    }
+
+    @GetMapping("/alextest")
+    public String alextest(){
+        return "alextest";
     }
 }

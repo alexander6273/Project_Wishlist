@@ -3,6 +3,7 @@ package com.projectwishlist.controllers;
 import com.projectwishlist.models.Item;
 import com.projectwishlist.models.Wishlist;
 import com.projectwishlist.repositories.WishlistRep;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,14 +31,26 @@ public class WishlistController {
 
  */
     @GetMapping("/getWishlist")
-    public String getWishlist(Model model) {
-        ArrayList<Wishlist> list = wishListRep.getAllWishlistsFromUser(1);
-        model.addAttribute("wishlists", list);
-        return "wishlist";
+    public String getWishlist(Model model, HttpSession session) {
+        System.out.println("LOL");
+        System.out.println(session.getAttribute("userId"));
+        int userId = (int)session.getAttribute("userId");
+
+        if(userId > 0) {
+            System.out.println();
+            System.out.println(userId);
+            ArrayList<Wishlist> list = wishListRep.getAllWishlistsFromUser(userId);
+            model.addAttribute("wishlists", list);
+            return "wishlist";
+        }else {
+            return "redirect:/index";
+        }
     }
 
     @GetMapping("/createWishlist")
-    public String createWishlist() {
+    public String createWishlist(HttpSession session) {
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+
         return "create-wishlist";
     }
 

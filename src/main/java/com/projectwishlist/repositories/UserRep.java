@@ -46,24 +46,32 @@ public class UserRep {
       }
 
 
-     public boolean authenticateUser(String usernameInput, String passwordInput) throws SQLException {
+     public int authenticateUser(String usernameInput, String passwordInput) throws SQLException {
          String sql = "SELECT * FROM projectwishlist." + table +
                  " WHERE " + rows.get(1) + " = " + "'" + usernameInput + "' AND " + rows.get(2) + " = '" + passwordInput + "' ;";
 
          System.out.println(sql);
 
-         ResultSet resultSet = databaseRep.getResultSet(sql);
+             ResultSet resultSet = databaseRep.getResultSet(sql);
 
+         int userId = -1;
          String username = null;
          String password = null;
+         int result;
 
          while (resultSet.next()) {
+             userId = resultSet.getInt(rows.get(0));
              username = resultSet.getString(rows.get(1));
              password = resultSet.getString(rows.get(2));
          }
 
-         if (username != null && !username.equals(usernameInput)) return false;
-         assert password != null;
-         return password.equals(passwordInput);
+         if(username.equals(usernameInput) && password.equals(passwordInput)){
+             result = userId;
+
+         }else {
+             result = -1;
+         }
+
+         return result;
      }
 }

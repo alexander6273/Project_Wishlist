@@ -1,6 +1,7 @@
 package com.projectwishlist.repositories;
 
 import com.projectwishlist.models.Wishlist;
+import org.springframework.web.context.request.WebRequest;
 
 import java.sql.Array;
 import java.sql.ResultSet;
@@ -29,6 +30,28 @@ public class WishlistRep {
         rows.add("wishlist_name");
         rows.add("wishlist_link");
         rows.add("user_id");
+    }
+
+    public void prepareWishlist(WebRequest dataFromForm) {
+        rows.remove(0);
+        String newRows = databaseRep.commaSeperateRows(rows);
+        ArrayList<String> data = new ArrayList<>();
+        rows.add(0,"wishlist_id"); // resets rows
+
+        data.add(dataFromForm.getParameter("wl-name"));
+        data.add(dataFromForm.getParameter("wl-link"));
+        data.add(dataFromForm.getParameter("wl-userid"));
+        String convertedData = databaseRep.commaSeperateData(data);
+
+        insertWishlistIntoDB(newRows, convertedData);
+    }
+
+    public void insertWishlistIntoDB(String rows, String data) {
+        databaseRep.insertData("wishlist", rows, data);
+    }
+
+    public void deleteWishlist(int id) {
+        databaseRep.deleteData("wishlist", "wishlist_id", id);
     }
 
     public Wishlist getWishListFromDB(int wishlistId) {
@@ -131,6 +154,7 @@ public class WishlistRep {
 
          */
     }
+
 
 
 }

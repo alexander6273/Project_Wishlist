@@ -6,7 +6,9 @@ import com.projectwishlist.repositories.WishlistRep;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,20 @@ public class WishlistController {
     public String createWishlist() {
         return "create-wishlist";
     }
+
+    @PostMapping("/createNewWishlist")
+    public String createNewWishlist(WebRequest dataFromForm) {
+        wishListRep.prepareWishlist(dataFromForm);
+        return "redirect:/getWishlist";
+
+    }
+
+    @GetMapping("/deleteWishlist")
+    public String deleteWishlist(@RequestParam int id) {
+        wishListRep.deleteWishlist(id);
+        return "redirect:/getWishlist";
+    }
+
 
 
 

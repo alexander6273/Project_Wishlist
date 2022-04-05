@@ -34,6 +34,11 @@ public class WishlistController {
         return "wishlist";
     }
 
+    @GetMapping("/createWishlist")
+    public String createWishlist() {
+        return "create-wishlist";
+    }
+
 
 
 

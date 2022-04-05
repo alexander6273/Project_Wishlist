@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" th:href="@{/navbar.css}" href="../static/navbar.css">
     <link rel="stylesheet" th:href="@{/style.css}" href="../static/style.css">
+    <link rel="stylesheet" th:href="@{/wishlist-items.css}" href="../static/wishlist-items.css">
     <title>Wishlist items</title>
 </head>
 <body>
@@ -22,9 +23,21 @@
 
     <main>
         <section id="item-wrapper">
+            <h1>Wishlist items:</h1>
             <div class="item" th:each="item: ${items}">
-                <span th:text="${item.getName()}"></span>
-                <span th:text="${item.getPrice()}"></span>
+                <div class="item-name">
+                    <p>Name:</p>
+                    <span class="item-from-db" th:text="${item.getName()}"></span>
+                </div>
+                <div class="item-price">
+                    <p>Price:</p>
+                    <span class="item-from-db" th:text="${item.getPrice()}"></span>
+                </div>
+
+                <div class="wishlist-buttons">
+                    <button class="general-button" type="button">Update</button>
+                    <button class="general-button" type="button">Delete</button>
+                </div>
             </div>
         </section>
     </main>

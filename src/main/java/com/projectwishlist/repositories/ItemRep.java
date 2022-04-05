@@ -1,6 +1,7 @@
 package com.projectwishlist.repositories;
 
 import com.projectwishlist.models.Item;
+import com.projectwishlist.models.Wishlist;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -66,6 +67,38 @@ public class ItemRep {
         }
         return items;
     }
+
+    public Item getItemFromDb(int itemId) {
+        ResultSet resultSet = databaseRep.getDataWhereId(table, rows.get(0), itemId);
+
+        String itemName = null;
+        int itemPrice;
+        String itemLink = null;
+        Item item = null;
+
+        try {
+            while(resultSet.next()) {
+                itemId = resultSet.getInt(rows.get(0));
+                itemName = resultSet.getString(rows.get(1));
+                itemPrice = resultSet.getInt(rows.get(2));
+                itemLink = resultSet.getString(rows.get(3));
+
+                item = new Item(itemId, itemName,itemPrice,itemLink);
+            }
+            if (itemName != null) {
+                return item;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void updateItem(ArrayList<String> rows, ArrayList<String> data, String rowId, int dataId){
+        databaseRep.updateData(table,rows, data, rowId, dataId);
+    }
+
 
 
     public static void main(String[] args) {

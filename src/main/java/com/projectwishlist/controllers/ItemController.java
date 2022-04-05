@@ -2,28 +2,44 @@ package com.projectwishlist.controllers;
 
 import com.projectwishlist.models.Item;
 import com.projectwishlist.repositories.ItemRep;
+import com.projectwishlist.services.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 
 @Controller
 public class ItemController {
-    ItemRep itemRepo = new ItemRep();
+    ItemRep itemRep = new ItemRep();
+    ItemService itemService = new ItemService();
+
 
     @GetMapping("/showWishlistItems")
     public String showWishlistItems(Model model) {
-        ArrayList<Item> itemList = itemRepo.getItemsFromWishlist(1);
+        ArrayList<Item> itemList = itemRep.getItemsFromWishlist(1);
         model.addAttribute("items", itemList);
         return "wishlist-items";
     }
 
     @GetMapping("/wishlist")
     public String wishlist(@RequestParam int id, Model model) {
-        ArrayList<Item> itemList = itemRepo.getItemsFromWishlist(id);
+        ArrayList<Item> itemList = itemRep.getItemsFromWishlist(id);
         model.addAttribute("items", itemList);
         return "wishlist-items";
     }
+
+    @GetMapping("/wishlist-update-item")
+    public String updateItem(@RequestParam int id, Model model){
+        itemService.updateItem(id,model);
+        return "item-update";
+    }
+
+    @PostMapping("/update-item")
+    public String itemUpdate(WebRequest formData){
+        itemService.updateItemDb(formData);
+        return "redirect:/wishlist?id=1";
+    }
+
 }

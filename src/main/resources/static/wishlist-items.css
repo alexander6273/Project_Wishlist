@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    padding: 10px 0 5px 0;
+    width: 311px;
+    border-bottom: 1px solid black;
+}
+
+.item-from-db {
+    color: white;
+}
+
+.item > div {
+    min-width: 100px;
+}

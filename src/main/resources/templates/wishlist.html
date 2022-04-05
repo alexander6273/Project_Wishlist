@@ -25,10 +25,21 @@
 
         <section id="wishlist-wrapper">
             <div class="wishlist" th:each="wishlist: ${wishlists}">
-                <a th:href="@{/wishlist?id={id}(id=${wishlist.getId()})}">asda</a>
                 <span th:text="${wishlist.getName()}"></span>
+                <a th:href="@{/wishlist?id={id}(id=${wishlist.getId()})}">Show wishlist</a>
+                <div class="wishlist-buttons">
+                    <button class="general-button" type="button">Update</button>
+                    <button class="general-button" type="button">Delete</button>
+                </div>
             </div>
+
         </section>
+
+        <div class="create-wrapper">
+            <button class="general-button" type="button">
+                <a th:href="@{createWishlist}">Create new wishlist</a>
+            </button>
+        </div>
     </main>
 </body>
 </html>

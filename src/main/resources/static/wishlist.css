@@ -33,6 +33,19 @@ span {
     cursor: pointer;
 }
 
+.create-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+
+.create-wrapper .general-button {
+    font-size: 20px;
+}
+
+
 /*
 .wishlist-img {
     width: 50px;

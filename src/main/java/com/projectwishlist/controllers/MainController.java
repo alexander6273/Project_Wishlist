@@ -10,28 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController
 {
-    DatabaseRep databaseRep = new DatabaseRep();
+    private DatabaseRep databaseRep;
+
+    public MainController() {
+        this.databaseRep = new DatabaseRep();;
+    }
+
     //Controller methods
     @GetMapping("/")
     public String index() {
-        System.out.println("LOL");
         return "index";
-    }
-    /*@GetMapping("/lol")
-    public String lol(){
-
-        UserRep userRep = new UserRep();
-        UserService userService = new UserService();
-        User user = userService.getUserFromId(1);
-        return user.toString();
-    }*/
-
-    @GetMapping("/alextest")
-    public void test(){
-
-        DatabaseRep dbr = new DatabaseRep();
-
-        dbr.insertData("item", "item_name, item_price, item_link", "'seng', '200', 'test'");
-
     }
 }

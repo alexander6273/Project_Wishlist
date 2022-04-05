@@ -130,5 +130,62 @@ public class DatabaseRep {
         return result;
     }
 
+    public void updateData(String table, ArrayList<String> rows, ArrayList<String> data, String rowId, int dataId){
+
+        String sql = "";
+        String rowsAndData = updateDataString(rows, data);
+        if(rows.size() == data.size()) {
+            sql = "UPDATE " + "projectwishlist." + table +
+                    " SET " + rowsAndData +
+                    " WHERE " + rowId + " = " + dataId;
+            try {
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+    public String updateDataString(ArrayList<String>rows, ArrayList<String> data){
+        String result = "";
+
+        if(rows.size() == data.size()){
+            for (int i = 0; i < rows.size(); i++) {
+                String rowField = rows.get(i);
+                String dataField = data.get(i);
+
+                if(i == (rows.size())-1){
+                    result+= rowField + " = ";
+                    result+= "'" + dataField + "'";
+                }else {
+                    result+= rowField + " = ";
+                    result+= "'" + dataField + "'";
+                    result+= ", ";
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+/*
+    public static void main(String[] args) {
+        DatabaseRep databaseRep = new DatabaseRep();
+
+        ArrayList<String> rows = new ArrayList<String>();
+        ArrayList<String> data = new ArrayList<String>();
+
+        rows.add("item_name");
+        rows.add("item_price");
+
+        data.add("Lagkage");
+        data.add("200");
+
+        databaseRep.updateData("item", rows, data,"item_id", 1);
+    }
+ */
 
 }

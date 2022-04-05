@@ -43,6 +43,18 @@ public class UserController
         return "fejl";
     }
 
+    @PostMapping("/creatNewUser")
+    public String creatNewUser(WebRequest data){
+        UserRep userRep = new UserRep();
+
+        String username = data.getParameter("username");
+        String password = data.getParameter("password");
+        String firstname = data.getParameter("firstname");
+
+        userRep.addNewUser(username, password, firstname);
+        return "index";
+    }
+
     @GetMapping("/alextest")
     public String alextest(){
         return "alextest";

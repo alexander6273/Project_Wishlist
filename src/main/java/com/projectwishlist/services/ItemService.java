@@ -15,6 +15,10 @@ public class ItemService {
         this.itemRep = new ItemRep();
     }
 
+    public void deleteItem(@RequestParam int id){
+        itemRep.deleteItem(id);
+    }
+
     public void updateItem(@RequestParam int id, Model model){
 
         Item item = itemRep.getItemFromDb(id);

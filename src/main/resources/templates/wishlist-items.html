@@ -30,21 +30,21 @@
                 </div>
                 <div class="item" th:each="item: ${items}">
                     <div class="item-name">
-                        <!--<p>Name:</p>-->
                         <span class="item-from-db" th:text="${item.getName()}"></span>
                     </div>
                     <div class="item-price">
-                        <!--<p>Price:</p>-->
                         <span class="item-from-db" th:text="${item.getPrice()}"></span>
                     </div>
 
-                    <div class="wishlist-buttons">
-                        <button class="general-button" type="button">
-                            <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
-                        </button>
-                        <button class="general-button" type="button">Delete</button>
-                    </div>
+                <div class="wishlist-buttons">
+                    <button class="general-button" type="button">
+                        <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
+                    </button>
+                    <button class="general-button" type="button">
+                        <a th:href="@{/delete-item?id={id}(id=${item.getId()})}">Delete</a>
+                    </button>
                 </div>
+            </div>
             </div>
             <div class="right">
                 <h2>Add item to wishlist</h2>

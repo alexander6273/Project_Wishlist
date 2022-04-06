@@ -40,7 +40,7 @@ public class ItemController {
     public String deleteItem(@RequestParam int id){
         System.out.println("test delete");
         itemService.deleteItem(id);
-        return "redirect:/wishlist?id=2";
+        return "redirect:/getWishlist";
     }
 
     @PostMapping("/update-item")

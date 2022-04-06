@@ -22,25 +22,29 @@
     </header>
     <main>
         <h1>Wishlist items:</h1>
-        <section id="item-wrapper">
+        <section id="items-wrapper">
             <div class="left">
-            <div class="item" th:each="item: ${items}">
-                <div class="item-name">
+                <div class="headline">
                     <p>Name:</p>
-                    <span class="item-from-db" th:text="${item.getName()}"></span>
-                </div>
-                <div class="item-price">
                     <p>Price:</p>
-                    <span class="item-from-db" th:text="${item.getPrice()}"></span>
                 </div>
+                <div class="item" th:each="item: ${items}">
+                    <div class="item-name">
+                        <!--<p>Name:</p>-->
+                        <span class="item-from-db" th:text="${item.getName()}"></span>
+                    </div>
+                    <div class="item-price">
+                        <!--<p>Price:</p>-->
+                        <span class="item-from-db" th:text="${item.getPrice()}"></span>
+                    </div>
 
-                <div class="wishlist-buttons">
-                    <button class="general-button" type="button">
-                        <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
-                    </button>
-                    <button class="general-button" type="button">Delete</button>
+                    <div class="wishlist-buttons">
+                        <button class="general-button" type="button">
+                            <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
+                        </button>
+                        <button class="general-button" type="button">Delete</button>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="right">
                 <h2>Add item to wishlist</h2>

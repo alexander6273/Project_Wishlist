@@ -36,6 +36,13 @@ public class ItemController {
         return "item-update";
     }
 
+    @GetMapping("/delete-item")
+    public String deleteItem(@RequestParam int id){
+        System.out.println("test delete");
+        itemService.deleteItem(id);
+        return "redirect:/wishlist?id=2";
+    }
+
     @PostMapping("/update-item")
     public String itemUpdate(WebRequest formData){
         itemService.updateItemDb(formData);

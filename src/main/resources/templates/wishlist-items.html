@@ -38,7 +38,9 @@
                     <button class="general-button" type="button">
                         <a th:href="@{/wishlist-update-item?id={id}(id=${item.getId()})}">Update</a>
                     </button>
-                    <button class="general-button" type="button">Delete</button>
+                    <button class="general-button" type="button">
+                        <a th:href="@{/delete-item?id={id}(id=${item.getId()})}">Delete</a>
+                    </button>
                 </div>
             </div>
             </div>

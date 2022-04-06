@@ -1,6 +1,7 @@
 package com.projectwishlist.repositories;
 
 import com.projectwishlist.models.User;
+import org.springframework.web.context.request.WebRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,9 +14,11 @@ public class UserRep {
 
 
 
+
      public UserRep() {
          declareRows();
          this.databaseRep = new DatabaseRep();
+
      }
 
      public void declareRows(){
@@ -73,5 +76,17 @@ public class UserRep {
          }
 
          return result;
+     }
+
+     public void addNewUser(String username, String password, String firstname){
+         ArrayList<String> data = new ArrayList<>();
+         data.add(username);
+         data.add(password);
+         data.add(firstname);
+         String dataString = databaseRep.commaSeperateData(data);
+         rows.remove(0);
+         String rowsString = databaseRep.commaSeperateRows(rows);
+         rows.add(0, "user_id");
+         databaseRep.insertData(table, rowsString, dataString);
      }
 }

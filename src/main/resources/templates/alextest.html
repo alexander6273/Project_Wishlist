@@ -41,13 +41,13 @@
     </div>
     <div>
         <h2>Signup</h2>
-        <form>
-            <label for="newEmail">Email</label><br>
-            <input type="text" id="newEmail" name="Email"><br>
+        <form method="POST" action="/creatNewUser">
             <label for="newUsername">Username</label><br>
-            <input type="text" id="newUsername" name="Username"><br>
-            <label for="newPassword">password</label><br>
+            <input type="text" id="newUsername" name="username"><br>
+            <label for="newPassword">Password</label><br>
             <input type="text" id="newPassword" name="password"><br>
+            <label for="firstname">First name</label><br>
+            <input type="text" id="firstname" name="firstname"><br>
             <input type="submit" value="Submit">
         </form>
     </div>

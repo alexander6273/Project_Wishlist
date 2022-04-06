@@ -24,6 +24,7 @@ public class ItemRep {
         rows.add("item_name");
         rows.add("item_price");
         rows.add("item_link");
+        rows.add("wishlist_id");
     }
     public String rowsToString(){
         return databaseRep.commaSeperateRows(rows);
@@ -40,8 +41,10 @@ public class ItemRep {
 
     public ArrayList<Item> getItemsFromWishlist(int wishlistId){
         rowsString = databaseRep.commaSeperateRowsWithTablename(rows, table);
+        String sql = "SELECT " + rowsString + " FROM projectwishlist." + table
+                + " WHERE wishlist_id = " + wishlistId + " ;";
 
-        String sql = "SELECT " + rowsString + " FROM projectwishlist." + table + " INNER JOIN projectwishlist.wishlistitems ON item.item_id = wishlistitems.item_id WHERE wishlistitems.wishlist_id = " + wishlistId + " ;";
+        /*String sql = "SELECT " + rowsString + " FROM projectwishlist." + table + " INNER JOIN projectwishlist.wishlistitems ON item.item_id = wishlistitems.item_id WHERE wishlistitems.wishlist_id = " + wishlistId + " ;";*/
         ResultSet resultSet = databaseRep.getResultSet(sql);
         System.out.println(sql);
         ArrayList<Item> items = new ArrayList<>();

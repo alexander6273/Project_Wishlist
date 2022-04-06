@@ -15,7 +15,6 @@ public class ItemController {
     ItemRep itemRep = new ItemRep();
     ItemService itemService = new ItemService();
 
-
     @GetMapping("/showWishlistItems")
     public String showWishlistItems(Model model) {
         ArrayList<Item> itemList = itemRep.getItemsFromWishlist(1);
@@ -27,6 +26,7 @@ public class ItemController {
     public String wishlist(@RequestParam int id, Model model) {
         ArrayList<Item> itemList = itemRep.getItemsFromWishlist(id);
         model.addAttribute("items", itemList);
+        model.addAttribute("wishlistId", id);
         return "wishlist-items";
     }
 
@@ -40,6 +40,13 @@ public class ItemController {
     public String itemUpdate(WebRequest formData){
         itemService.updateItemDb(formData);
         return "redirect:/wishlist?id=1";
+    }
+
+    @PostMapping("/addItemToWishlist")
+    public String addItemToWishList(WebRequest formData) {
+        itemService.insertItemDb(formData);
+        int id = Integer.parseInt(formData.getParameter("wishlistId"));
+        return "redirect:/wishlist?id=" + id;
     }
 
 }

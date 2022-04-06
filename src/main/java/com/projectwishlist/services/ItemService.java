@@ -64,4 +64,13 @@ public class ItemService {
             itemRep.updateItem(rows,data,rowId,dataId);
         }
     }
+
+    public void insertItemDb(WebRequest formData) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(formData.getParameter("item-name"));
+        data.add(formData.getParameter("item-price"));
+        data.add(formData.getParameter("item-link"));
+        data.add(formData.getParameter("wishlistId"));
+        itemRep.insertToDb(data);
+    }
 }

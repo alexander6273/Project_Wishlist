@@ -125,34 +125,7 @@ public class WishlistRep {
     }
 
     public static void main(String[] args) {
-        /*
-        WishlistRep wishlistRep = new WishlistRep();
-        ArrayList<ArrayList<String>> wishlistList = wishlistRep.getAllWishlistsFromUser(1);
 
-        int count = 1;
-        ArrayList<String> wishlist = new ArrayList<>();
-
-        String wishlistId = "";
-        String wishlistName = "";
-        String wishlistLink = "";
-        String userId = "";
-        for (int i = 0; i < wishlistList.size(); i++) {
-            wishlist = wishlistList.get(i);
-            System.out.println("Wishlist: " + count);
-
-            for (int j = 0; j < wishlist.size(); j++) {
-                wishlistId = wishlist.get(0);
-                wishlistName = wishlist.get(1);
-                wishlistLink = wishlist.get(2);
-                userId = wishlist.get(3);
-            }
-
-            System.out.println(wishlistId + " " + wishlistName + " " + wishlistLink + " " + userId);
-
-            count++;
-        }
-
-         */
     }
 
 

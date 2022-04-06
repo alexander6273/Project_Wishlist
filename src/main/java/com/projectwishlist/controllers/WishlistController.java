@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class WishlistController {
     WishlistRep wishListRep = new WishlistRep();
 
+
     @GetMapping("/wltest")
     public String wlTest() {
         return wishListRep.getData();

@@ -21,8 +21,9 @@
         </nav>
     </header>
     <main>
+        <h1>Wishlist items:</h1>
         <section id="item-wrapper">
-            <h1>Wishlist items:</h1>
+            <div class="left">
             <div class="item" th:each="item: ${items}">
                 <div class="item-name">
                     <p>Name:</p>
@@ -39,6 +40,21 @@
                     </button>
                     <button class="general-button" type="button">Delete</button>
                 </div>
+            </div>
+            </div>
+            <div class="right">
+                <h2>Add item to wishlist</h2>
+                    <form method="POST" action="/addItemToWishlist">
+                        <input type="text" hidden name = "wishlistId" th:value="${wishlistId}">
+                        <label for="item-name">Name: </label>
+                        <input id="item-name" type="text" name="item-name" placeholder="item name"/>
+                        <label for="item-price">Price: </label>
+                        <input id="item-price" type="text" name="item-price" placeholder="item price"/>
+                        <label for="item-link">Link: </label>
+                        <input id="item-link" type="text" name="item-link" placeholder="item link">
+                        <input type="submit">
+                    </form>
+                </section>
             </div>
         </section>
     </main>
